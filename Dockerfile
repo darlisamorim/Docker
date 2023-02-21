@@ -9,8 +9,9 @@ RUN apt-get update && \
 	apt-get install -y php && \
 	apt-get install -y php-xdebug && \
 	apt-get install -y php-mysql && \
+	apt-get install -y git && \
 	apt-get install -y curl && \
-	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup && rm composer-setup.php && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php && rm composer-setup.php && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 	
 EXPOSE 80
 
