@@ -6,7 +6,9 @@ RUN apt-get update && \
 	apt-get -y upgrade && \
 	ln -snf /usr/share/zoneinfo/${timezone} /etc/localtime && echo ${timezone} > /etc/timezone && \
 	apt-get install -y apache2 && \
+	apt-get install -y software-properties-common && \
 	apt-get install -y php && \
+	apt-get install -y php-cli php-json php-common php-mysql php-zip php-gd php-mbstring php-curl php-xml php-bcmath && \
 	apt-get install -y php-xdebug && \
 	apt-get install -y php-mysql && \
 	apt-get install -y git && \
