@@ -1,25 +1,38 @@
-version: "3"
+version: "3.1"
 
 services:
-  db:
-    image: mariadb:10.4
-    environment:
-      - MYSQL_USER=root
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=laravel
-    ports:
-      - 8011:3306
-    volumes:
-      - ./db_data:/etc/mysql/conf.d
-
   app:
     image: darlisamorim/dlsbuild:1.0
     volumes:
       - ./:/var/www/html
     ports:
-      - 8010:80
+      - 8000:80
     links:
       - db
     depends_on:
       - db
     tty: true
+
+  db:
+    image: mariadb:10.11.2    
+    restart: always
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=dls
+    ports:
+      - 8002:3306
+    volumes:
+      - ./db_data:/etc/mysql/conf.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8001:80
+    environment:
+      - PMA_ARBITRARY=1      
+      - PMA_HOST=db
+    depends_on:
+      - db
+
+volumes:
+  db_data:
